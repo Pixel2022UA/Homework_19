@@ -1,3 +1,5 @@
+import json
+
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
 from django.shortcuts import render, redirect
@@ -20,23 +22,15 @@ oauth.register(
 
 
 def index(request):
-    if request.method == "GET":
-        avatar = Avatar.objects.all()
-        if avatar is not None:
-            context = {"avatar": avatar.image.url}
-        else:
-            context = {}
-        return render(request, "index.html", context=context)
 
-    if request.method == "POST":
-        form = AvatarForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            avatar = Avatar.objects.last()
-            context = {"avatar": avatar.image.url}
-            return redirect("index.html", context=context)
-
-    return render(request, "index.html")
+    return render(
+        request,
+        "index.html",
+        context={
+            "session": request.session.get("user"),
+            "pretty": json.dumps(request.session.get("user"), indent=4),
+        },
+    )
 
 
 

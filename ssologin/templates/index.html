@@ -7,7 +7,7 @@
     {% if session %}
     <h1>Welcome {{session.userinfo.name}}!</h1>
     <p><a href="{% url 'logout' %}" id="qsLogoutBtn">Logout</a></p>
-    <div><pre>{{pretty}}</pre></div>
+    <div><pre> <img src="{{session.userinfo.picture}}" alt="Avatar"></pre></div>
     {% else %}
     <h1 id="profileDropDown">Welcome Guest</h1>
     <p><a href="{% url 'login' %}" id="qsLoginBtn">Login</a></p>
