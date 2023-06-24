@@ -21,7 +21,7 @@ oauth.register(
 
 def index(request):
     if request.method == "GET":
-        avatar = Avatar.objects.last()
+        avatar = Avatar.objects.all()
         if avatar:
             context = {"avatar": avatar.image.url}
         else:
