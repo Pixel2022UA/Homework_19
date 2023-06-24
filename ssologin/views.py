@@ -22,7 +22,7 @@ oauth.register(
 def index(request):
     if request.method == "GET":
         avatar = Avatar.objects.all()
-        if avatar:
+        if avatar is not None:
             context = {"avatar": avatar.image.url}
         else:
             context = {}
